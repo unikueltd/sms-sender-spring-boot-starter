@@ -34,7 +34,7 @@ spring:
             default-sign-name: 'your-default-sign-name'
 ```
 
-- Then, in your code, you can use `SmsSenderComposer` to store and retrieve files
+- Then, in your code, you can use `SmsSenderComposer` to send and query sms
 
 ```java
 @Service
