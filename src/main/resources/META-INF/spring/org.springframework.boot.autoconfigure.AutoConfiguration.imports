@@ -1,0 +1,5 @@
+# Sms Sender for Spring Boot Starter
+# Copyright (c) 2025 Yookue Ltd. All rights reserved.
+# https://yookue.com
+
+com.yookue.springstarter.smssender.config.SmsSenderAutoConfiguration
