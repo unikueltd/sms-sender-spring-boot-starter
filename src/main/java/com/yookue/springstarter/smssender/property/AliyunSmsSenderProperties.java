@@ -53,7 +53,7 @@ public class AliyunSmsSenderProperties implements Serializable {
     /**
      * The region of the SMS service
      * <p>
-     * For example: "cn-hangzhou"
+     * For example: "cn-beijing"
      */
     private String region;
 

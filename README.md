@@ -21,30 +21,17 @@ Spring Boot application integrates sms-sender, support various sms engines.
 ```yml
 spring:
     sms-sender:
-        concat-date: true
-        storage-type: 'minio'
-        local:
-            entry-path: '/path/to/your/storage'
-            domain: 'http://localhost:8090'
-        minio:
-            endpoint: 'localhost'
-            port: 9000
-            access-key: 'minio'
-            secret-key: 'minio123'
-            bucket-name: 'demo-bucket'
-            access-control: 'public-read'
+        sender-type: 'tencent'
         aliyun:
-            endpoint: 'https://oss-cn-beijing.aliyuncs.com'
-            access-key: 'your-access-key'
-            secret-key: 'your-secret-key'
-            bucket-name: 'demo-bucket'
-            access-control: 'public-read'
+            access-key-id: 'your-access-key'
+            access-key-secret: 'your-secret-key'
+            region: 'cn-beijing'
         tencent:
-            endpoint: 'https://cos.ap-beijing.myqcloud.com'
             secret-id: 'your-secret-id'
             secret-key: 'your-secret-key'
-            bucket-name: 'demo-bucket'
-            access-control: 'public-read'
+            region: 'ap-beijing'
+            default-app-id: 'your-default-app-id'
+            default-sign-name: 'your-default-sign-name'
 ```
 
 - Then, in your code, you can use `SmsSenderComposer` to store and retrieve files
@@ -53,31 +40,26 @@ spring:
 @Service
 public class DemoService {
     @Autowired
-    private SmsSenderComposer storageComposer;
+    private SmsSenderComposer senderComposer;
 
     public void demoMethod() {
-        // Upload a file, or a pure text, or a byte array, or an input stream
-        storageComposer.uploadObject();
+        // Sends a plain sms
+        SendPlainSmsParam sendParam = new SendPlainSmsParam();
+        sendParam.setMobilePhones(Collections.singleton("+86-13800138000"));
+        sendParam.setTemplateCode("1234567890");
+        sendParam.setTemplateParams(Maps.of("verifyCode", "123456"));
+        String receiptId = senderComposer.sendPlainSms(sendParam);
 
-        // Check if exist an object
-        storageComposer.existsObject(objectKey, pathPrefix);
+        // Queries the status of a sms
+        QuerySmsStatusParam queryParam = new QuerySmsStatusParam();
+        sendParam.setMobilePhone("+86-13800138000");
+        sendParam.setReceiptId(receiptId);
+        sendParam.setSentDate(LocalDate.now());
+        List<QuerySmsStatusResult> queryResults = senderComposer.querySmsStatus(queryParam);
 
-        // Download an object as an input stream
-        storageComposer.downloadObject(objectKey, pathPrefix);
-
-        // Download an object as a file
-        storageComposer.downloadObjectTo(objectKey, pathPrefix, targetFile);
-
-        // Remove an object
-        storageComposer.removeObject(objectKey, pathPrefix);
-
-        // Get the object URL
-        storageComposer.getObjectUrl(objectKey, pathPrefix);
-        storageComposer.getObjectUrl(objectKey, pathPrefix, expiration);
-        
-        // Or get the raw client for advanced usage
-        storageComposer.getRawClient();
-        storageComposer.getRawClientAs(expectType);
+        // Gets the raw client for advanced usage
+        senderComposer.getRawClient();
+        senderComposer.getRawClientAs(expectType);
     }
 }
 ```
