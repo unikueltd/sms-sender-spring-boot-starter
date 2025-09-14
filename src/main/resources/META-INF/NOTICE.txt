@@ -1,6 +1,6 @@
 Sms Sender for Spring Boot Starter
-Copyright (c) 2025 Yookue Ltd. All rights reserved.
-https://yookue.com
+Copyright (c) 2025 Unikue Ltd. All rights reserved.
+https://unikue.cn
 
 This product is licensed to you under the Apache License, Version 2.0
 (the "License"). You may not use this product except in compliance with

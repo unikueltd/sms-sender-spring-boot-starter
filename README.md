@@ -8,7 +8,7 @@ Spring Boot application integrates sms-sender, support various sms engines.
 
 ```xml
     <dependency>
-        <groupId>com.yookue.springstarter</groupId>
+        <groupId>cn.unikue.springstarter</groupId>
         <artifactId>sms-sender-spring-boot-starter</artifactId>
         <version>LATEST</version>
     </dependency>
@@ -66,7 +66,7 @@ public class DemoService {
 
 ## Document
 
-- Github: https://github.com/yookue/sms-sender-spring-boot-starter
+- Github: https://github.com/unikueltd/sms-sender-spring-boot-starter
 
 ## Requirement
 
@@ -80,12 +80,12 @@ See the `NOTICE.txt` file for required notices and attributions.
 
 ## Donation
 
-You like this package? Then [donate to us](https://yookue.com/donation) to support the development.
+You like this package? Then [donate to us](https://unikue.cn/donation) to support the development.
 
 ## Copyright
 
-Beijing Yookue Network Technology Ltd.
+Beijing Unikue Network Technology Ltd.
 
 ## Website
 
-- Yookue: https://yookue.com
+- Unikue: https://unikue.cn
