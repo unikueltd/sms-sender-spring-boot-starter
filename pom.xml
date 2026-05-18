@@ -49,9 +49,16 @@
 
         <spring-boot.version>3.5.14</spring-boot.version>
 
-        <aliyun-sms.version>4.5.1</aliyun-sms.version>
+        <dysmsapi20170525.version>4.5.1</dysmsapi20170525.version>
+        <alibabacloud-gateway-spi.version>0.0.3</alibabacloud-gateway-spi.version>
+        <credentials-java.version>1.0.3</credentials-java.version>
+        <jacoco-agent.version>0.8.8</jacoco-agent.version>
+        <tea-openapi.version>0.3.12</tea-openapi.version>
+
+        <tencentcloud-sdk-java-sms.version>3.1.1451</tencentcloud-sdk-java-sms.version>
+        <tencentcloud-sdk-java-common.version>3.1.1451</tencentcloud-sdk-java-common.version>
+
         <commons-io.version>2.22.0</commons-io.version>
-        <tencent-sms.version>3.1.1451</tencent-sms.version>
         <plexus-spring-condition.version>3.5.14</plexus-spring-condition.version>
 
         <javadoc-docent-maven-plugin.version>2.1.2</javadoc-docent-maven-plugin.version>
@@ -84,16 +91,79 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- Aliyun -->
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>dysmsapi20170525</artifactId>
-            <version>${aliyun-sms.version}</version>
+            <version>${dysmsapi20170525.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.aliyun</groupId>
+                    <artifactId>alibabacloud-gateway-spi</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.aliyun</groupId>
+                    <artifactId>tea-openapi</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>alibabacloud-gateway-spi</artifactId>
+            <version>${alibabacloud-gateway-spi.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.aliyun</groupId>
+                    <artifactId>credentials-java</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>credentials-java</artifactId>
+            <version>${credentials-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun</groupId>
+            <artifactId>tea-openapi</artifactId>
+            <version>${tea-openapi.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>org.jacoco.agent</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.jacoco</groupId>
+            <artifactId>org.jacoco.agent</artifactId>
+            <version>${jacoco-agent.version}</version>
+        </dependency>
+
+        <!-- Tencent -->
         <dependency>
             <groupId>com.tencentcloudapi</groupId>
             <artifactId>tencentcloud-sdk-java-sms</artifactId>
-            <version>${tencent-sms.version}</version>
+            <version>${tencentcloud-sdk-java-sms.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.tencentcloudapi</groupId>
+                    <artifactId>tencentcloud-sdk-java-common</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>com.tencentcloudapi</groupId>
+            <artifactId>tencentcloud-sdk-java-common</artifactId>
+            <version>${tencentcloud-sdk-java-common.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.squareup.okhttp3</groupId>
+                    <artifactId>okhttp</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
